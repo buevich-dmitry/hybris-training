@@ -20,7 +20,8 @@
 			<product:productPrimaryImage product="${product}" format="thumbnail"/>
 		</a>
 		<ycommerce:testId code="searchPage_productName_link_${product.code}">
-			<a class="product__list--name" href="${productUrl}">${ycommerce:sanitizeHTML(product.name)}</a>
+			<a class="product__list--name" href="${productUrl}">${ycommerce:sanitizeHTML(product.name)}</a><br>
+			Likes count: ${product.likeCount}
 		</ycommerce:testId>
 
 		<div class="product__list--price-panel">

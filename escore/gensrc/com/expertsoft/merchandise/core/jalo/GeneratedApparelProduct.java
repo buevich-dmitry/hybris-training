@@ -1,27 +1,16 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 16.05.2018 12:22:16                         ---
+ * --- Generated at 16.05.2018 18:47:05                         ---
  * ----------------------------------------------------------------
- *  
- * [y] hybris Platform
- *  
- * Copyright (c) 2000-2016 SAP SE
- * All rights reserved.
- *  
- * This software is the confidential and proprietary information of SAP
- * Hybris ("Confidential Information"). You shall not disclose such
- * Confidential Information and shall use it only in accordance with the
- * terms of the license agreement you entered into with SAP Hybris.
- *  
  */
 package com.expertsoft.merchandise.core.jalo;
 
+import com.expertsoft.merchandise.core.constants.EsCoreConstants;
 import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.product.Product;
-import com.expertsoft.merchandise.core.constants.EsCoreConstants;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;

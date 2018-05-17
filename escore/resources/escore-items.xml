@@ -111,9 +111,22 @@
                 </attributes>
             </itemtype>
 
+            <!-- TODO delete it -->
+            <itemtype code="Product" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="likeCount" type="java.lang.Integer">
+                        <description>Count of likes on product.</description>
+                        <modifiers optional="false"/>
+                        <persistence type="property"/>
+                        <defaultvalue>Integer.valueOf(0)</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
             <itemtype code="Customer" autocreate="false" generate="false">
                 <attributes>
                     <attribute qualifier="secondEmail" type="java.lang.String">
+
                         <persistence type="property"/>
                     </attribute>
                 </attributes>

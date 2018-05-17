@@ -1,35 +1,29 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 16.05.2018 12:22:16                         ---
+ * --- Generated at 16.05.2018 18:47:05                         ---
  * ----------------------------------------------------------------
- *  
- * [y] hybris Platform
- *  
- * Copyright (c) 2000-2016 SAP SE
- * All rights reserved.
- *  
- * This software is the confidential and proprietary information of SAP
- * Hybris ("Confidential Information"). You shall not disclose such
- * Confidential Information and shall use it only in accordance with the
- * terms of the license agreement you entered into with SAP Hybris.
- *  
  */
 package com.expertsoft.merchandise.core.jalo;
 
+import com.expertsoft.merchandise.core.constants.EsCoreConstants;
+import com.expertsoft.merchandise.core.jalo.ApparelProduct;
+import com.expertsoft.merchandise.core.jalo.ApparelSizeVariantProduct;
+import com.expertsoft.merchandise.core.jalo.ApparelStyleVariantProduct;
+import com.expertsoft.merchandise.core.jalo.ElectronicsColorVariantProduct;
+import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloSystemException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.extension.Extension;
+import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.type.ComposedType;
 import de.hybris.platform.jalo.type.JaloGenericCreationException;
-import com.expertsoft.merchandise.core.constants.EsCoreConstants;
-import com.expertsoft.merchandise.core.jalo.ApparelProduct;
-import com.expertsoft.merchandise.core.jalo.ApparelSizeVariantProduct;
-import com.expertsoft.merchandise.core.jalo.ApparelStyleVariantProduct;
-import com.expertsoft.merchandise.core.jalo.ElectronicsColorVariantProduct;
+import de.hybris.platform.jalo.user.Customer;
+import de.hybris.platform.jalo.user.User;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +37,12 @@ public abstract class GeneratedEsCoreManager extends Extension
 	static
 	{
 		final Map<String, Map<String, AttributeMode>> ttmp = new HashMap();
+		Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
+		tmp.put("likeCount", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.jalo.product.Product", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
+		tmp.put("secondEmail", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.jalo.user.Customer", Collections.unmodifiableMap(tmp));
 		DEFAULT_INITIAL_ATTRIBUTES = ttmp;
 	}
 	@Override
@@ -165,6 +165,115 @@ public abstract class GeneratedEsCoreManager extends Extension
 	public String getName()
 	{
 		return EsCoreConstants.EXTENSIONNAME;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.likeCount</code> attribute.
+	 * @return the likeCount - Count of likes on product.
+	 */
+	public Integer getLikeCount(final SessionContext ctx, final Product item)
+	{
+		return (Integer)item.getProperty( ctx, EsCoreConstants.Attributes.Product.LIKECOUNT);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.likeCount</code> attribute.
+	 * @return the likeCount - Count of likes on product.
+	 */
+	public Integer getLikeCount(final Product item)
+	{
+		return getLikeCount( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.likeCount</code> attribute. 
+	 * @return the likeCount - Count of likes on product.
+	 */
+	public int getLikeCountAsPrimitive(final SessionContext ctx, final Product item)
+	{
+		Integer value = getLikeCount( ctx,item );
+		return value != null ? value.intValue() : 0;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.likeCount</code> attribute. 
+	 * @return the likeCount - Count of likes on product.
+	 */
+	public int getLikeCountAsPrimitive(final Product item)
+	{
+		return getLikeCountAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.likeCount</code> attribute. 
+	 * @param value the likeCount - Count of likes on product.
+	 */
+	public void setLikeCount(final SessionContext ctx, final Product item, final Integer value)
+	{
+		item.setProperty(ctx, EsCoreConstants.Attributes.Product.LIKECOUNT,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.likeCount</code> attribute. 
+	 * @param value the likeCount - Count of likes on product.
+	 */
+	public void setLikeCount(final Product item, final Integer value)
+	{
+		setLikeCount( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.likeCount</code> attribute. 
+	 * @param value the likeCount - Count of likes on product.
+	 */
+	public void setLikeCount(final SessionContext ctx, final Product item, final int value)
+	{
+		setLikeCount( ctx, item, Integer.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.likeCount</code> attribute. 
+	 * @param value the likeCount - Count of likes on product.
+	 */
+	public void setLikeCount(final Product item, final int value)
+	{
+		setLikeCount( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.secondEmail</code> attribute.
+	 * @return the secondEmail
+	 */
+	public String getSecondEmail(final SessionContext ctx, final Customer item)
+	{
+		return (String)item.getProperty( ctx, EsCoreConstants.Attributes.Customer.SECONDEMAIL);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.secondEmail</code> attribute.
+	 * @return the secondEmail
+	 */
+	public String getSecondEmail(final Customer item)
+	{
+		return getSecondEmail( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.secondEmail</code> attribute. 
+	 * @param value the secondEmail
+	 */
+	public void setSecondEmail(final SessionContext ctx, final Customer item, final String value)
+	{
+		item.setProperty(ctx, EsCoreConstants.Attributes.Customer.SECONDEMAIL,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.secondEmail</code> attribute. 
+	 * @param value the secondEmail
+	 */
+	public void setSecondEmail(final Customer item, final String value)
+	{
+		setSecondEmail( getSession().getSessionContext(), item, value );
 	}
 	
 }
