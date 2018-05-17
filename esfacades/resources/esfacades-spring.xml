@@ -18,7 +18,12 @@
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 		
-	<context:annotation-config/> 
+	<context:annotation-config/>
+	<context:component-scan base-package="com.expertsoft.merchandise.facades"/>
+
+    <alias alias="customerFacade" name="electronicsCustomerFacade"/>
+    <bean name="electronicsCustomerFacade" class="com.expertsoft.merchandise.facades.customer.ElectronicsCustomerFacade"
+          parent="defaultCustomerFacade"/>
 
 	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade"/>
 	<bean id="defaultSimpleSuggestionFacade" class="com.expertsoft.merchandise.facades.suggestion.impl.DefaultSimpleSuggestionFacade" >
@@ -87,6 +92,11 @@
 		<property name="list" ref="productConverter"/>
 		<property name="add" ref="apparelProductPopulator"/>
 	</bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="customerConverter"/>
+        <property name="add" ref="customerSecondEmailPopulator"/>
+    </bean>
 
 	<!-- accelerator Image Format Mappings -->
 	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>

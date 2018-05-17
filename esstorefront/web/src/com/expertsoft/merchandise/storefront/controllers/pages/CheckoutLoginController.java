@@ -10,6 +10,8 @@
  */
 package com.expertsoft.merchandise.storefront.controllers.pages;
 
+import com.expertsoft.merchandise.storefront.controllers.ControllerConstants;
+import com.expertsoft.merchandise.storefront.forms.ElectronicsRegisterForm;
 import de.hybris.platform.acceleratorfacades.flow.CheckoutFlowFacade;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.GuestForm;
@@ -19,13 +21,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.security.GUIDCookieStrate
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.commercefacades.order.data.CartData;
-import com.expertsoft.merchandise.storefront.controllers.ControllerConstants;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,6 +29,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -83,7 +83,9 @@ public class CheckoutLoginController extends AbstractLoginPageController
 			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException
 	{
 		getGuestValidator().validate(form, bindingResult);
-		return processAnonymousCheckoutUserRequest(form, bindingResult, model, request, response);
+		String result = processAnonymousCheckoutUserRequest(form, bindingResult, model, request, response);
+		model.addAttribute("registerForm", new ElectronicsRegisterForm());
+		return result;
 	}
 
 
@@ -105,6 +107,13 @@ public class CheckoutLoginController extends AbstractLoginPageController
 	protected String getView()
 	{
 		return ControllerConstants.Views.Pages.Checkout.CheckoutLoginPage;
+	}
+
+	@Override
+	protected String getDefaultLoginPage(boolean loginError, HttpSession session, Model model) throws CMSItemNotFoundException {
+		String result = super.getDefaultLoginPage(loginError, session, model);
+		model.addAttribute("registerForm", new ElectronicsRegisterForm());
+		return result;
 	}
 
 	@Override

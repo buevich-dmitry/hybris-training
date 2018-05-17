@@ -35,6 +35,9 @@
 	<formElement:formPasswordBox idKey="register.checkPwd"
 		labelKey="register.checkPwd" path="checkPwd" inputCSS="form-control"
 		mandatory="true" />
+	<formElement:formInputBox idKey="register.secondEmail"
+        labelKey="register.secondEmail" path="secondEmail" inputCSS="form-control"
+        mandatory="true"/>
 
     <c:if test="${ not empty consentTemplateData }">
         <form:hidden path="consentForm.consentTemplateId" value="${consentTemplateData.id}" />

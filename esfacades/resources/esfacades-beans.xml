@@ -19,4 +19,12 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="secondEmail" type="String"/>
+	</bean>
+
+    <bean class="de.hybris.platform.commercefacades.user.data.RegisterData">
+        <property name="secondEmail" type="String"/>
+    </bean>
 </beans>

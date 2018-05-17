@@ -19,6 +19,7 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import com.expertsoft.merchandise.storefront.forms.ElectronicsUpdateProfileForm;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import org.apache.commons.collections.CollectionUtils;
@@ -473,11 +474,12 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		final UpdateProfileForm updateProfileForm = new UpdateProfileForm();
+		final ElectronicsUpdateProfileForm updateProfileForm = new ElectronicsUpdateProfileForm();
 
 		updateProfileForm.setTitleCode(customerData.getTitleCode());
 		updateProfileForm.setFirstName(customerData.getFirstName());
 		updateProfileForm.setLastName(customerData.getLastName());
+		updateProfileForm.setSecondEmail(customerData.getSecondEmail());
 
 		model.addAttribute("updateProfileForm", updateProfileForm);
 
@@ -491,7 +493,7 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@RequestMapping(value = "/update-profile", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String updateProfile(final UpdateProfileForm updateProfileForm, final BindingResult bindingResult, final Model model,
+	public String updateProfile(final ElectronicsUpdateProfileForm updateProfileForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		getProfileValidator().validate(updateProfileForm, bindingResult);
@@ -504,6 +506,7 @@ public class AccountPageController extends AbstractSearchPageController
 		customerData.setLastName(updateProfileForm.getLastName());
 		customerData.setUid(currentCustomerData.getUid());
 		customerData.setDisplayUid(currentCustomerData.getDisplayUid());
+		customerData.setSecondEmail(updateProfileForm.getSecondEmail());
 
 		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
 
