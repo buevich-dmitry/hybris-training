@@ -25,7 +25,6 @@ import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
 import com.expertsoft.merchandise.initialdata.constants.MerchandiseInitialDataConstants;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetupParameterMethod
 	public List<SystemSetupParameter> getInitializationOptions()
 	{
-		final List<SystemSetupParameter> params = new ArrayList<SystemSetupParameter>();
+		final List<SystemSetupParameter> params = new ArrayList<>();
 
 		params.add(createBooleanSystemSetupParameter(IMPORT_CORE_DATA, "Import Core Data", true));
 		params.add(createBooleanSystemSetupParameter(IMPORT_SAMPLE_DATA, "Import Sample Data", true));
@@ -111,8 +110,8 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		final List<ImportData> importData = new ArrayList<> ();
 
 		final ImportData sampleImportData = new ImportData();
-		sampleImportData.setProductCatalogName(MERCHANDISE + "ProductCatalog");
-		sampleImportData.setContentCatalogNames(Collections.singletonList(MERCHANDISE + "ContentCatalog"));
+		sampleImportData.setProductCatalogName(MERCHANDISE);
+		sampleImportData.setContentCatalogNames(Collections.singletonList(MERCHANDISE));
 		sampleImportData.setStoreNames(Collections.singletonList(MERCHANDISE));
 		importData.add(sampleImportData);
 
