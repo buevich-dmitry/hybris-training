@@ -10,11 +10,22 @@
 # -----------------------------------------------------------------------
 # ImpEx for Importing CMS Content
 # Macros / Replacement Parameter definitions
-$contentCatalog=__CONTENT_CATALOG_NAME__
+$prefix=electronics
+$contentCatalog=$prefixContentCatalog
+$productCatalog=$prefixProductCatalog
+
 $contentCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$contentCatalog]),CatalogVersion.version[default=Staged])[default=$contentCatalog:Staged]
 
-INSERT_UPDATE SearchBoxComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+INSERT_UPDATE ContentSlotName; name[unique=true]; template(uid,$contentCV)[unique=true][default='ProductListPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+                             ; Section1         ;                                                                         ; ProductPromoCmsComponent ; narrow
 
-INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
+INSERT_UPDATE ProductPromoCmsComponent; uid[unique=true]             ; name                             ; &componentRef                ; product(code,catalogVersion(catalog(id),version)); $contentCV[unique=true]
+                               ; cameraTripodPromoCmsComponent; Camera Tripod Promo CMS Component; cameraTripodPromoCmsComponent; 932577:$productCatalog:Staged                           ;
 
-INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];wrapAfter;showLanguageCurrency
+# ContentSlot
+INSERT_UPDATE ContentSlot; uid[unique=true]        ; name                          ; active; cmsComponents(&componentRef) ; $contentCV[unique=true]; ;
+                         ; Section1Slot-ProductList; Section1 Slot for Product List; true  ; cameraTripodPromoCmsComponent;
+
+# ContentSlotForPage for product list
+INSERT_UPDATE ContentSlotForPage; uid[unique=true]    ; position[unique=true]; contentSlot(uid,$contentCV)[unique=true]; page(uid,$contentCV)[unique=true][default='productList']; $contentCV[unique=true];
+                                ; Section1-ProductList; Section1             ; Section1Slot-ProductList

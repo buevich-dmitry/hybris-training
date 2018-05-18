@@ -111,5 +111,26 @@
             </itemtype>
         </typegroup>
 
+        <typegroup name="cms">
+            <itemtype code="ProductPromoCmsComponent" extends="SimpleCMSComponent"
+                      jaloclass="com.expertsoft.merchandise.core.jalo.ProductPromoCmsComponent"
+                      abstract="false" autocreate="true" generate="true">
+                <description>CMS component displaying some product info and promo text.</description>
+                <deployment table="ProductPromoCmsComponent" typecode="10200"/>
+                <attributes>
+                    <attribute qualifier="promoText" type="localized:java.lang.String">
+                        <description>Promo text.</description>
+                        <modifiers/>
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="product" type="Product">
+                        <description>Product to be promoted.</description>
+                        <modifiers optional="false" initial="true"/>
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+
     </itemtypes>
 </items>
