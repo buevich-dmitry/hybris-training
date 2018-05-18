@@ -1,0 +1,1 @@
+<?xml version="1.0" encoding="utf-8"?><testclasses><merchandisefacades><testclass>com.expertsoft.merchandise.facades.suggestion.DefaultSimpleSuggestionFacadeIntegrationTest</testclass><testclass>com.expertsoft.merchandise.facades.suggestion.impl.DefaultSimpleSuggestionFacadeTest</testclass></merchandisefacades></testclasses>
