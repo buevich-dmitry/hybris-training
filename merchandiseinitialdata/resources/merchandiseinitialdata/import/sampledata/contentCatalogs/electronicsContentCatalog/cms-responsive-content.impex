@@ -20,7 +20,7 @@ INSERT_UPDATE ContentSlotName; name[unique=true]; template(uid,$contentCV)[uniqu
                              ; Section1         ;                                                                         ; ProductPromoCmsComponent ; narrow
 
 INSERT_UPDATE ProductPromoCmsComponent; uid[unique=true]             ; name                             ; &componentRef                ; product(code,catalogVersion(catalog(id),version)); $contentCV[unique=true]
-                               ; cameraTripodPromoCmsComponent; Camera Tripod Promo CMS Component; cameraTripodPromoCmsComponent; 932577:$productCatalog:Staged                           ;
+                                      ; cameraTripodPromoCmsComponent; Camera Tripod Promo CMS Component; cameraTripodPromoCmsComponent; 932577:$productCatalog:Staged                    ;
 
 # ContentSlot
 INSERT_UPDATE ContentSlot; uid[unique=true]        ; name                          ; active; cmsComponents(&componentRef) ; $contentCV[unique=true]; ;
