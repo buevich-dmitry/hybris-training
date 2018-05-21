@@ -189,4 +189,11 @@
 	</bean>
 
 	<bean id="genderData" class="com.expertsoft.merchandise.facades.product.data.GenderData" scope="prototype"/>
+
+	<bean id="productSearchResultAverageRatingPopulator" class="com.expertsoft.merchandise.facades.populators.ProductSearchResultAverageRatingPopulator"/>
+
+	<bean parent="modifyPopulatorList">
+		<property name="add" ref="productSearchResultAverageRatingPopulator"/>
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+	</bean>
 </beans>

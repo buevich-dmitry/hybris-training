@@ -13,6 +13,7 @@
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="genders" type="java.util.List&lt;com.expertsoft.merchandise.facades.product.data.GenderData>"/>
+		<property name="avgRating" type="Double"/>
 	</bean>
 
 	<bean class="com.expertsoft.merchandise.facades.product.data.GenderData">

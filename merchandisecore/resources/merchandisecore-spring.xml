@@ -551,4 +551,6 @@
 		<property name="itemCleanupHooks" ref="csTicketRetentionHooks"/>
 		<property name="ticketBusinessService" ref="ticketBusinessService"/>
 	</bean>
+
+	<bean id="productAverageRatingAttributeHandler" class="com.expertsoft.merchandise.core.handlers.ProductAverageRatingAttributeHandler"/>
 </beans>

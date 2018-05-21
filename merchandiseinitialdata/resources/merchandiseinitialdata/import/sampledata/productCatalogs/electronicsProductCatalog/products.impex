@@ -11,8 +11,7 @@
 # ImpEx for Importing Products
 
 # Macros / Replacement Parameter definitions
-$productCatalog=__PRODUCT_CATALOG_NAME__
-$productCatalogName=__PRODUCT_CATALOG_FULL_NAME__
+$productCatalog=electronicsProductCatalog
 
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $supercategories=supercategories(code, $catalogVersion)
@@ -21,3 +20,24 @@ $approved=approvalstatus(code)[default='check']
 
 # Insert Products
 INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+
+#Product ratings
+$product1=1986316
+$product2=1322041
+$product3=1978440_md
+
+UPDATE Product; code[unique=true]; ratings(code[unique=true])                                     ; $catalogVersion
+              ; $product1        ; $product1-1, $product1-2, $product1-3                          ;
+              ; $product2        ; $product2-1                                                    ;
+              ; $product3        ; $product3-1, $product3-2, $product3-3, $product3-4, $product3-5;
+
+INSERT_UPDATE Rating; code[unique=true]; value; $catalogVersion
+                    ; $product1-1      ; 2
+                    ; $product1-2      ; 3
+                    ; $product1-3      ; 3
+                    ; $product2-1      ; 5
+                    ; $product3-1      ; 5
+                    ; $product3-2      ; 5
+                    ; $product3-3      ; 4
+                    ; $product3-4      ; 4
+                    ; $product3-5      ; 4

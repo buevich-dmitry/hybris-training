@@ -11,16 +11,13 @@
 #
 # Import the Solr configuration for the store
 #
-$productCatalog=__PRODUCT_CATALOG_NAME__
+$productCatalog=electronicsProductCatalog
 $catalogVersions=catalogVersions(catalog(id),version);
-$serverConfigName=
-$indexConfigName=
-$searchConfigName=
-$facetSearchConfigName=
-$facetSearchConfigDescription=
-$searchIndexNamePrefix=
-$solrIndexedType=
-$indexBaseSite=
+$facetSearchConfigName=electronicsIndex
+$facetSearchConfigDescription=Electronics Solr Index
+$searchIndexNamePrefix=electronics
+$solrIndexedType=electronicsProductType
+$indexBaseSite=electronics
 $indexLanguages=ja,en,de,zh
 $indexCurrencies=JPY,USD
 
@@ -50,10 +47,17 @@ INSERT_UPDATE SolrFacetSearchConfig;name[unique=true];description;indexNamePrefi
 UPDATE BaseSite;uid[unique=true];solrFacetSearchConfiguration(name)
 
 # Define price range set
-INSERT_UPDATE SolrValueRangeSet;name[unique=true];qualifier;type;solrValueRanges(&rangeValueRefID)
+INSERT_UPDATE SolrValueRangeSet; name[unique=true]     ; qualifier; type  ; solrValueRanges(&rangeValueRefID)
+                               ; electronicsRatingRange;          ; double; rangeRefRating1, rangeRefRating2, rangeRefRating3, rangeRefRating4, rangeRefRating5
 
 # Define price ranges
-INSERT_UPDATE SolrValueRange;&rangeValueRefID;solrValueRangeSet(name)[unique=true];name[unique=true];from;to
+INSERT_UPDATE SolrValueRange; &rangeValueRefID; solrValueRangeSet(name)[unique=true]; name[unique=true]; from; to
+                            ; rangeRefRating1 ; electronicsRatingRange              ; 1                ; 0.5 ; 1.49
+                            ; rangeRefRating2 ; electronicsRatingRange              ; 2                ; 1.5 ; 2.49
+                            ; rangeRefRating3 ; electronicsRatingRange              ; 3                ; 2.5 ; 3.49
+                            ; rangeRefRating4 ; electronicsRatingRange              ; 4                ; 3.5 ; 4.49
+                            ; rangeRefRating5 ; electronicsRatingRange              ; 5                ; 4.5 ; 5.49
+
 
 # Non-facet properties
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;valueProviderParameter
@@ -65,7 +69,8 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);multiValue[default=true];facet[default=true];facetType(code);facetSort(code);priority;visible;categoryField[default=true];fieldValueProvider;facetDisplayNameProvider;topValuesProvider
 
 # Other facet properties
-INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];type(code);sortableType(code);currency[default=false];localized[default=false];multiValue[default=false];facet[default=true];facetType(code);facetSort(code);priority;visible;useForSpellchecking[default=false];useForAutocomplete[default=false];fieldValueProvider;facetDisplayNameProvider;customFacetSortProvider;topValuesProvider;rangeSets(name)
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique=true]; name[unique=true]; type(code); sortableType(code); currency[default=false]; localized[default=false]; multiValue[default=false]; facet[default=true]; facetType(code); facetSort(code); priority; visible; useForSpellchecking[default=false]; useForAutocomplete[default=false]; fieldValueProvider; facetDisplayNameProvider; customFacetSortProvider; topValuesProvider       ; rangeSets(name)
+                                 ; $solrIndexedType                        ; avgRating        ; double    ;                   ;                        ;                         ; true                     ;                    ; MultiSelectOr  ; Alpha          ; 4000    ; true   ;                                   ;                                  ;                   ;                         ;                        ; defaultTopValuesProvider; electronicsRatingRange
 
 # Create the queries that will be used to extract data for Solr
 INSERT_UPDATE SolrIndexerQuery;solrIndexedType(identifier)[unique=true];identifier[unique=true];type(code);injectCurrentDate[default=true];injectCurrentTime[default=true];injectLastIndexTime[default=true];query;user(uid)

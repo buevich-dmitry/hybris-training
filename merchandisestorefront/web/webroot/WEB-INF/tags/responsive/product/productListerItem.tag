@@ -41,7 +41,9 @@
 			<div class="product__listing--description">${ycommerce:sanitizeHTML(product.summary)}</div>
 		</c:if>
 
-
+		<c:if test="${not empty product.avgRating}">
+			<div>Rating: ${product.avgRating}</div>
+		</c:if>
 
 		<c:set var="product" value="${product}" scope="request"/>
 		<c:set var="addToCartText" value="${addToCartText}" scope="request"/>
