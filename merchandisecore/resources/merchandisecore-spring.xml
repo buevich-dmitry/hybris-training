@@ -553,4 +553,10 @@
 	</bean>
 
 	<bean id="productAverageRatingAttributeHandler" class="com.expertsoft.merchandise.core.handlers.ProductAverageRatingAttributeHandler"/>
+
+    <bean id="rangedAvgCustomerRatingProvider"
+          class="com.expertsoft.merchandise.core.search.solrfacetsearch.provider.impl.RangedAvgCustomerRatingProvider"
+          parent="abstractPropertyFieldValueProvider">
+        <property name="fieldNameProvider" ref="solrFieldNameProvider" />
+    </bean>
 </beans>

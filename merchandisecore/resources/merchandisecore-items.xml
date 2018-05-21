@@ -119,6 +119,17 @@
 
             <itemtype code="Rating" autocreate="true" generate="true">
                 <deployment table="ElectronicsRating" typecode="10201"/>
+                <custom-properties>
+                    <property name="catalogItemType">
+                        <value>java.lang.Boolean.TRUE</value>
+                    </property>
+                    <property name="catalogVersionAttributeQualifier">
+                        <value>"catalogVersion"</value>
+                    </property>
+                    <property name="uniqueKeyAttributeQualifier">
+                        <value>"code"</value>
+                    </property>
+                </custom-properties>
                 <attributes>
                     <attribute qualifier="code" type="java.lang.String">
                         <persistence type="property"/>

@@ -10,6 +10,10 @@
  */
 package com.expertsoft.merchandise.core.setup;
 
+import de.hybris.platform.catalog.jalo.CatalogManager;
+import de.hybris.platform.catalog.jalo.CatalogVersion;
+import de.hybris.platform.catalog.jalo.SyncAttributeDescriptorConfig;
+import de.hybris.platform.catalog.jalo.SyncItemJob;
 import de.hybris.platform.commerceservices.setup.AbstractSystemSetup;
 import de.hybris.platform.core.Registry;
 import de.hybris.platform.core.initialization.SystemSetup;
@@ -18,7 +22,10 @@ import de.hybris.platform.core.initialization.SystemSetup.Type;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.core.initialization.SystemSetupParameter;
 import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
-import com.expertsoft.merchandise.core.constants.MerchandiseCoreConstants;
+//import com.expertsoft.merchandise.core.constants.MerchandiseCoreConstants;
+import de.hybris.platform.jalo.product.Product;
+import de.hybris.platform.jalo.type.AttributeDescriptor;
+import de.hybris.platform.jalo.type.TypeManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +34,7 @@ import java.util.List;
 /**
  * This class provides hooks into the system's initialization and update processes.
  */
-@SystemSetup(extension = MerchandiseCoreConstants.EXTENSIONNAME)
+@SystemSetup(extension = "merchandisecore")
 public class CoreSystemSetup extends AbstractSystemSetup
 {
 	public static final String IMPORT_ACCESS_RIGHTS = "accessRights";
@@ -49,6 +56,25 @@ public class CoreSystemSetup extends AbstractSystemSetup
 		importImpexFile(context, "/merchandisecore/import/common/themes.impex");
 		importImpexFile(context, "/merchandisecore/import/common/user-groups.impex");
 		importImpexFile(context, "/merchandisecore/import/common/cronjobs.impex");
+
+		CatalogManager cm = CatalogManager.getInstance();
+
+		// get source and target version of synchronization
+		CatalogVersion src = cm.getCatalog( "electronicsProductCatalog" ).getCatalogVersion( "Staged" );
+		CatalogVersion tgt = cm.getCatalog( "electronicsProductCatalog" ).getCatalogVersion( "Online" );
+
+		// find rule by source and target (provided there is just one!)
+		SyncItemJob syncJob = cm.getSyncJob( src, tgt );
+
+		// get attribute which should be treated as part-of
+		AttributeDescriptor ad = TypeManager.getInstance().getComposedType(Product.class)
+                .getDeclaredAttributeDescriptor( "ratings" );
+
+		// get or create attribute synchronization config item
+		SyncAttributeDescriptorConfig cfg = syncJob.getConfigFor(ad, true);
+
+		// set part-of behavior to true
+		cfg.setCopyByValue( true );
 	}
 
 	/**
